@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1731076744 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\main.cpp
+1730762877 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\main.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
 	"funciones.h"
+	"juego.h"
 	"rlutil.h"
 
-1731077348 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\funciones.h
+1730765980 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\funciones.h
 
 1730401722 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\juego.h
 
@@ -14,6 +15,62 @@
 	<iostream>
 
 1730762810 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1732605289 source:c:\users\lain\desktop\100-o-escalera-main\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"funciones.h"
+	"rlutil.h"
+
+1732605685 c:\users\lain\desktop\100-o-escalera-main\funciones.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"funciones.h"
+	"rlutil.h"
+
+1730832519 c:\users\lain\desktop\100-o-escalera-main\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1732605871 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"funciones.h"
+	"rlutil.h"
+
+1732605685 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\funciones.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"funciones.h"
+	"rlutil.h"
+
+1730832519 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\rlutil.h
 	<iostream>
 	<string>
 	<cstdio>

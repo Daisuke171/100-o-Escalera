@@ -4,46 +4,84 @@
 using namespace std;
 #include "funciones.h"
 #include "rlutil.h"
+using namespace rlutil;
 
 int main(){
-    int opcion, vTop3[3]{}, puntos=0;
-    string ganador = "", ganador2 = "", ganador3 = "";
+    int puntuacionMasAlta = 0;
+    string ganador = "";
+    int vTopPuntajes[3]{};
+    string vTopJugadores[3]="";
 
+    setBackgroundColor(MAGENTA);
+    setColor(WHITE);
+
+    int y=0;
+    hidecursor();
+    cls();
     do{
-        system("cls");
-        cout << "--------------------------" << endl;
-        cout << "1- NUEVO JUEVO 1 JUGADOR" << endl;
-        cout << "2- NUEVO JUEVO 2 JUGADORES" << endl;
-        cout << "3- PUNTUACION MAS ALTA" << endl;
-        cout << "4- MODO SIMULADO 1 JUGADORES" << endl;
-        cout << "5- MODO SIMULADO 2 JUGADORES" << endl;
-        cout << "--------------------------" << endl;
-        cout << "0- SALIR       " << endl;
-        cout << "--------------------------" << endl;
-        cout << "Elija opcion: ";
-        cin >> opcion;
+        locate(tcols()/4,3);
+        cout << "   100 O ESCALERAS" << endl;
+        locate(tcols()/4,4);
+        cout << "NUEVO JUEVO 1 JUGADOR" << endl;
+        locate(tcols()/4,5);
+        cout << "NUEVO JUEVO 2 JUGADORES" << endl;
+        locate(tcols()/4,6);
+        cout << "PUNTUACION MAS ALTA" << endl;
+        locate(tcols()/4,7);
+        cout << "MODO SIMULADO 1 JUGADORES" << endl;
+        locate(tcols()/4,8);
+        cout << "MODO SIMULADO 2 JUGADORES" << endl;
+        locate(tcols()/4,9);
+        cout << "       SALIR" << endl;
 
-        switch(opcion)
-        {
-        case 1:
-            unJugador(vTop3, puntos, ganador);
-            break;
-        case 2:
-            dosJugadores(puntuacionMasAlta, ganador);
-            break;
-        case 3:
-            mostrarPuntuacionMasAlta(puntos, puntuacionMasAlta, puntuacionMasAlta2, puntuacionMasAlta3, ganador, ganador2, ganador3);
-            break;
-        case 4:
-            simulado();
-            break;
-        case 5:
-            simulado2();
-            break;
-        case 0:
-            return 0;
-            break;
+        locate((tcols()/4)-2, 4+y);
+        cout << (char)175;
+        int key = getkey();
+
+        switch(key){
+            case 14: //up
+                locate((tcols()/4)-2, 4+y);
+                cout << " ";
+                y--;
+                if(y<0){
+                    y=0;
+                }
+                break;
+            case 15: //dwn
+                locate((tcols()/4)-2, 4+y);
+                cout << " ";
+                y++;
+                if(y>5){
+                    y=5;
+                }
+                break;
+            case 1:
+                switch(y){
+                    case 0:
+                        unJugador(puntuacionMasAlta, ganador, vTopJugadores, vTopPuntajes);
+                        break;
+                    case 1:
+                        dosJugadores(puntuacionMasAlta, ganador);
+                        break;
+                    case 2:
+                        mostrarPuntajes(vTopJugadores, vTopPuntajes);
+                        break;
+                    case 3:
+                        simulado();
+                        break;
+                    case 4:
+                        simulado2();
+                        break;
+                    case 5:
+                        return 0;
+                        break;
+                    }
+                break;
+            default:
+                break;
         }
+
+
     }
     while(true);
 }

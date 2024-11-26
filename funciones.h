@@ -1,11 +1,21 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
-void unJugador(int vTop3[], string &ganador);
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+#include "funciones.h"
+#include "rlutil.h"
+using namespace rlutil;
+
+void unJugador(int &puntuacionMasAlta, string &ganador, string topJugadores[], int topPuntaje[]);
 
 void dosJugadores(int &puntuacionMasAlta, string &ganador);
 
-void mostrarPuntuacionMasAlta(int vTop3[], string &ganador);
+void actualizarTablero(string topJugadores[], int topPuntajes[], string jugador, int puntajeJugador);
+
+void mostrarPuntajes(string topJugadores[], int topPuntajes[]);
 
 void simulado();
 
@@ -25,97 +35,99 @@ void cargarVectorManual(int v[],int tam);
 
 int todosIguales2(const int v[], int tam);
 
+
 ///
 
 
-void unJugador(int vTop3[], string &ganador){
-    system("cls");
-    int tirada[6], total=0, puntaje=0;
+void unJugador(int &puntuacionMasAlta, string &ganador, string topJugadores[], int topPuntaje[]){
+    cls();
+    int tirada[6], total=0, maxpuntaje=0;
     char nombre[30];
 
-    cout << "Bienvenido" << endl << "Ingrese su nombre: ";
+    locate(tcols()/4,3);
+    cout << "Bienvenido" << endl;
+    locate(tcols()/4,4);
+    cout << "Ingrese su nombre: ";
     cin >> nombre;
 
     cout << endl;
+    locate(tcols()/4,5);
     cout << "Presione cualquier tecla para jugar" << endl;
     system("pause>null");
 
-    system("cls");
+    cls();
 
     int ronda = 1;
-    srand(time(0));
+    srand(time(NULL));
 
     while(total<100){
-        int maxronda=0;
-
         for(int i=1; i<=3; i++){
-            system("cls");
+            cls();
             cout << "Jugador: " << nombre << " |  Ronda " << ronda << " |  Tirada " << i << " |  Puntaje: " << total << endl;
-            cout << "-----------------------------------------------------------------------" << endl;
-            if(maxronda!=0){
-                cout << "Maximo puntaje de la ronda: " << maxronda << endl;
-            }
-            else cout << "Maximo puntaje de la ronda: " << endl;
             cout << "-----------------------------------------------------------------------" << endl;
 
             cargarVector(tirada, 6);
             dados(tirada, 6);
 
-            ///verificador de escalera
+            cout << endl;
+
+            ///se verifica si hubo una escalera
             if(escalera(tirada, 6)){
-                system("cls");
                 cout << "Felicidades " << nombre << " saco una escalera." << endl;
                 system("pause>null");
-                total=100;  ///para salir del while y ganar automaticamente
-                break;
+                maxpuntaje=100;
+                total=500;  ///para salir del while
+                break;  ///hacemos un break para salir del for y saltearnos todo los demas pasos, ya que ganamos automaticamente
             }
 
-            /// verificador si son todos iguales
+            ///verifica si hubo 6 dados iguales o no
             if(todosIguales(tirada, 6)){
-                if(tirada[0]!=6){   /// al entrar al if ya se asume que son todos iguales, entonces podemos tomar cualquier valor del vector para comparar
-                    total += tirada[0]*10;
-                    maxronda += tirada[0]*10;
+                total += tirada[0]*10;  ///añade al total el valor del primer numero*10
+                if(tirada[0]*10>maxpuntaje){    ///se actualiza la tirada mas grande
+                    maxpuntaje = tirada[0]*10;
+                    cout << endl << "Valor: " << tirada[0]*10 << endl;
                 }
-                else{   /// si son todos 6, se resetea el total
-                    total *= 0;
-                    maxronda += 0;
+                if(tirada[0]==6){   ///si el valor de los dados es 6, se resetea el total
+                    total=0;
+                    cout << endl << "Valor: " << 0 << endl;
                 }
             }
-            else{   ///en caso de no ser todos iguales, se suman los dados
-                total += sumarTirada(tirada, 6);
-                maxronda += sumarTirada(tirada, 6);
+            else{   ///en caso de ser distintos
+                total += sumarTirada(tirada, 6);    ///sumamos la tirada al total
+                if(sumarTirada(tirada, 6)>maxpuntaje){  ///se actualiza la tirada mas grande
+                    maxpuntaje = sumarTirada(tirada, 6);
+                }
+                cout << endl << "Valor: " << sumarTirada(tirada, 6) << endl;
             }
+
+
 
             cout << endl << endl << "Presione cualquier tecla para seguir a la siguiente tirada" << endl;
             system("pause>null");
 
-        }
+            ///se verifica si el total acumulado es 100
+            if(total>=100){
+                cout << "Felicidades " << nombre << " alcanzo los 100 puntos." << endl;
+                cout << "Su puntaje total es de: " << total << endl;
 
-        if(total>=100){
-            system("cls");
-            cout << "Felicidades " << nombre << " alcanzo los 100 puntos." << endl;
-            cout << "Su puntaje total es de: " << total << endl;
-
-            for(int i=0; i<3; i++){
-                if(puntaje>vTop3[0]){
-                        vTop3[i+2]=vTop3[i+1];
-                        vTop3[i+1]=vTop3[i];
-                        vTop3[i]=puntaje;
+                if(total > puntuacionMasAlta) {
+                    puntuacionMasAlta = total;  ///se actualiza los valores del tablero
+                    ganador = nombre;           ///se actuliza el nombre del ganador al tablero
                 }
+
+                system("pause>null");
+                break;
             }
 
-            system("pause>null");
-            break;
         }
-
-        system("cls");
-
-        cout << "Puntaje de esta ronda: " << maxronda << endl;
-
-        ronda++;
-
+        cls();
+        cout << "Maximo de la ronda: " << maxpuntaje << endl;
         system("pause>null");
+        ronda++;
     }
+
+    actualizarTablero(topJugadores, topPuntaje, nombre, total); ///se reacomoda los puntajes junto a sus respectivos nombres
+    cls();
 }
 
 void dosJugadores(int &puntuacionMasAlta, string &ganador){
@@ -141,7 +153,6 @@ void dosJugadores(int &puntuacionMasAlta, string &ganador){
     total_1=0;
     total_2=0;
     ronda=1;
-    srand(time(0));
     while(total<100){
         maxpuntaje_1=1;
         maxpuntaje_2=1;
@@ -265,17 +276,46 @@ void dosJugadores(int &puntuacionMasAlta, string &ganador){
         }
         ronda++;
     }
+
+    cls();
 }
 
-void mostrarPuntuacionMasAlta(int vTop[], string &ganador){
+void actualizarTablero(string topJugadores[], int topPuntajes[], string jugador, int puntajeJugador){
+    for (int i=0; i<3; i++) {
+        if (puntajeJugador>topPuntajes[i]) {
+            // Baja los puntajes y nombres abajo
+            for (int j=2; j>i; j--) {
+                topPuntajes[j] = topPuntajes[j - 1];
+                topJugadores[j] = topJugadores[j - 1];
+            }
+            // Pone el nuevo puntaje
+            topPuntajes[i] = puntajeJugador;
+            topJugadores[i] = jugador;
+            break;
+        }
+    }
+}
+
+void mostrarPuntajes(string topJugadores[], int topPuntajes[]){
     system("cls");
-
-
-
-
-
-
+    cout << "---- TOP 3 ----" << endl;
+    for (int i=0; i<3; i++) {
+        if (topJugadores[i]!=""){
+            if(topPuntajes[i]==500){
+                cout << i+1 << ". " << topJugadores[i] << " - " << "¡ESCALERA!" << endl;
+            }
+            else{
+                cout << i+1 << ". " << topJugadores[i] << " - " << topPuntajes[i] << " puntos" << endl;
+            }
+        }
+        else{
+            cout << i+1 << ". " << " <sin puntos>" << endl;
+        }
+    }
+    cout << "----------------------" << endl;
+    cout << endl << "Presione cualquier tecla volver al menu" << endl;
     system("pause>null");
+    cls();
 }
 
 void simulado(){
@@ -547,6 +587,7 @@ bool escalera(const int v[], int tam){
     return true;
 }
 
+///Agus
 bool todosIguales(const int v[], int tam){
     for(int i=0; i<tam; i++){
         if(v[0]!=v[i]){
@@ -565,6 +606,7 @@ void cargarVectorManual(int v[],int tam){
     }
 }
 
+///Diego
 int todosIguales2(const int v[], int tam){
     bool flag=true;
     for(int i=0; i<tam; i++){
@@ -577,5 +619,7 @@ int todosIguales2(const int v[], int tam){
     }
     return 0;
 }
+
+
 
 #endif // FUNCIONES_H_INCLUDED
