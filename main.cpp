@@ -3,12 +3,11 @@
 #include <ctime>
 using namespace std;
 #include "funciones.h"
-#include "juego.h"
 #include "rlutil.h"
 
 int main(){
-    int opcion, puntuacionMasAlta = 0;
-    string ganador = "";
+    int opcion, vTop3[3]{}, puntos=0;
+    string ganador = "", ganador2 = "", ganador3 = "";
 
     do{
         system("cls");
@@ -27,13 +26,13 @@ int main(){
         switch(opcion)
         {
         case 1:
-            unJugador(puntuacionMasAlta, ganador);
+            unJugador(vTop3, puntos, ganador);
             break;
         case 2:
             dosJugadores(puntuacionMasAlta, ganador);
             break;
         case 3:
-            mostrarPuntuacionMasAlta(puntuacionMasAlta, ganador);
+            mostrarPuntuacionMasAlta(puntos, puntuacionMasAlta, puntuacionMasAlta2, puntuacionMasAlta3, ganador, ganador2, ganador3);
             break;
         case 4:
             simulado();
