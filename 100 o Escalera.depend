@@ -1,20 +1,24 @@
 # depslib dependency file v1.0
-1730762877 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\main.cpp
+1732837474 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\main.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
 	"funciones.h"
-	"juego.h"
 	"rlutil.h"
 
-1730765980 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\funciones.h
+1733097851 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\funciones.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"funciones.h"
+	"rlutil.h"
 
 1730401722 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\juego.h
 
 1730142433 source:c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\menu.cpp
 	<iostream>
 
-1730762810 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\rlutil.h
+1730832519 c:\users\lain\desktop\pr1 2024 e c2 - trabajo práctico integrador\100 o escalera\rlutil.h
 	<iostream>
 	<string>
 	<cstdio>

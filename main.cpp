@@ -18,29 +18,32 @@ int main(){
     int y=0;
     hidecursor();
     cls();
+
+    perimetro(20,5);
+
     do{
-        locate(tcols()/4,3);
+        locate(tcols()/3,3);
         cout << "   100 O ESCALERAS" << endl;
-        locate(tcols()/4,4);
+        locate(tcols()/3,4);
         cout << "NUEVO JUEVO 1 JUGADOR" << endl;
-        locate(tcols()/4,5);
+        locate(tcols()/3,5);
         cout << "NUEVO JUEVO 2 JUGADORES" << endl;
-        locate(tcols()/4,6);
+        locate(tcols()/3,6);
         cout << "PUNTUACION MAS ALTA" << endl;
-        locate(tcols()/4,7);
+        locate(tcols()/3,7);
         cout << "MODO SIMULADO 1 JUGADORES" << endl;
-        locate(tcols()/4,8);
+        locate(tcols()/3,8);
         cout << "MODO SIMULADO 2 JUGADORES" << endl;
-        locate(tcols()/4,9);
+        locate(tcols()/3,9);
         cout << "       SALIR" << endl;
 
-        locate((tcols()/4)-2, 4+y);
+        locate((tcols()/3)-2, 4+y);
         cout << (char)175;
         int key = getkey();
 
         switch(key){
             case 14: //up
-                locate((tcols()/4)-2, 4+y);
+                locate((tcols()/3)-2, 4+y);
                 cout << " ";
                 y--;
                 if(y<0){
@@ -48,7 +51,7 @@ int main(){
                 }
                 break;
             case 15: //dwn
-                locate((tcols()/4)-2, 4+y);
+                locate((tcols()/3)-2, 4+y);
                 cout << " ";
                 y++;
                 if(y>5){
@@ -61,7 +64,7 @@ int main(){
                         unJugador(puntuacionMasAlta, ganador, vTopJugadores, vTopPuntajes);
                         break;
                     case 1:
-                        dosJugadores(puntuacionMasAlta, ganador);
+                        dosJugadores(puntuacionMasAlta, ganador, vTopJugadores, vTopPuntajes);
                         break;
                     case 2:
                         mostrarPuntajes(vTopJugadores, vTopPuntajes);
@@ -81,7 +84,7 @@ int main(){
                 break;
         }
 
-
+        perimetro(20,5);
     }
     while(true);
 }
