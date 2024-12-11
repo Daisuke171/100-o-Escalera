@@ -30,11 +30,8 @@ int main(){
         cout << "NUEVO JUEVO 2 JUGADORES" << endl;
         locate(tcols()/3,6);
         cout << "PUNTUACION MAS ALTA" << endl;
-        locate(tcols()/3,7);
-        cout << "MODO SIMULADO 1 JUGADORES" << endl;
+
         locate(tcols()/3,8);
-        cout << "MODO SIMULADO 2 JUGADORES" << endl;
-        locate(tcols()/3,9);
         cout << "       SALIR" << endl;
 
         locate((tcols()/3)-2, 4+y);
@@ -68,12 +65,6 @@ int main(){
                         break;
                     case 2:
                         mostrarPuntajes(vTopJugadores, vTopPuntajes);
-                        break;
-                    case 3:
-                        simulado();
-                        break;
-                    case 4:
-                        simulado2();
                         break;
                     case 5:
                         return 0;
